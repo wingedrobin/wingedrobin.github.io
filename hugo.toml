@@ -1,4 +1,107 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
-theme = 'LoveIt'
+baseURL = "https://wingedrobin.github.io"
+
+theme = "LoveIt"
+
+title = "給姆喇低賽"
+
+languageCode = "zh-TW"
+languageName = "繁體中文"
+defaultContentLanguage = "zh-tw"
+hasCJKLanguage = true
+
+enableRobotsTXT = true
+
+enableEmoji = true
+
+[params]
+  title = "給姆喇低賽"
+  description = "記錄資訊或遊戲開發領域中的議題"
+
+  [params.author]
+    name = "Yung-Chuan Chen"
+
+  [params.header]
+    [params.header.title]
+      name = "給姆喇低賽"
+      pre = ""
+      post = ""
+
+  [params.footer]
+    enable = true
+    custom = ''
+    hugo = true
+    copyright = true
+    author = true
+    since = 2026
+    icp = ""
+    license = ""
+
+  [params.home]
+    [params.home.profile]
+      enable = true
+      gravatarEmail = ""
+      avatarURL = "/images/avatar.png"
+      title = "「好記性，不如爛筆頭」"
+      subtitle = "記錄一些資訊或遊戲開發領域中的小議題，內容可能有誤，還請見諒並不吝給予指教。"
+      typeit = true
+      social = true
+      disclaimer = ""
+
+    [params.home.posts]
+      enable = true
+      paginate = 6
+      defaultHiddenFromHomePage = false
+
+  [params.social]
+    GitHub = "wingedrobin"
+    Linkedin = "wingedrobin"
+
+  [params.analytics]
+    enable = false
+
+    [params.analytics.google]
+    id = "G-G5PS64RJK1"
+
+  [params.page]
+    [params.page.toc]
+      enable = true
+      keepStatic = false
+      auto = true
+
+    [params.page.share]
+      enable = true
+      X = true
+      Threads = false
+      Facebook = true
+      Linkedin = true
+      Whatsapp = false
+      Pinterest = false
+      Tumblr = false
+      HackerNews = false
+      Reddit = false
+      VK = false
+      Buffer = false
+      Xing = false
+      Line = false
+      Instapaper = false
+      Pocket = false
+      Flipboard = false
+      Weibo = false
+      Blogger = false
+      Baidu = false
+      Odnoklassniki = false
+      Evernote = false
+      Skype = false
+      Trello = false
+      Diaspora = false
+      Mix = false
+      Telegram = false
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+
+  [markup.tableOfContents]
+    startLevel = 1
+    endLevel = 6
+

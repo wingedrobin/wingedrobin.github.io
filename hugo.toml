@@ -61,7 +61,7 @@ enableEmoji = true
     Linkedin = "wingedrobin"
 
   [params.analytics]
-    enable = false
+    enable = true
 
     [params.analytics.google]
     id = "G-G5PS64RJK1"

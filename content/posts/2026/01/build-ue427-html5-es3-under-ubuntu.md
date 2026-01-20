@@ -1,6 +1,6 @@
 +++
-title = '社群版UE4.27-HTML5-ES3在Ubuntu上建置與打包問題處理'
-date = '2026-01-14T16:32:52+08:00'
+title = '社群版UE4.27-HTML5-ES3在Ubuntu上建置與打包的問題及處理'
+date = '2026-01-19T16:32:52+08:00'
 draft = false
 +++
 
@@ -8,7 +8,7 @@ draft = false
 經過考量之後，決定使用社群版引擎，以下紀錄在引擎編譯及專案打包過程中發生的問題與其解決方式。
 
 > 系統版本： Ubuntu 24.04及Xubuntu 25.10 \
-> 測試專案： 2D Platform樣板專案 \
+> 測試專案： 2D Platform樣板專案
 >
 > 注意： 以下內容僅能確保引擎建置及專案打包可以成功，不保證所有引擎功能皆正確無誤。
 
@@ -38,11 +38,13 @@ draft = false
 
 解決方式：
 
-使用chmod或透過界面修改，以增加執行權限。\
+使用chmod或透過界面修改，以增加執行權限。
 
 ``` BASH
 chmod +x HTML5Setup.sh
 ```
+
+---
 
 錯誤訊息：
 
@@ -53,11 +55,15 @@ chmod +x HTML5Setup.sh
 安裝cmake。\
 原本在執行GenerateProjectFiles.sh的時候會安裝cmake，但由於社群版引擎的建置流程在Setup與GenerateProjectFiles之間還多了一個HTML5Setup，因此需要事先安裝cmake以避免錯誤。
 
+---
+
 錯誤訊息：
 
 > ./HTML5Setup.sh: line 33: python: command not found
 
 由於Ubuntu已內建python3，所以安裝python-is-python3即可。
+
+---
 
 錯誤訊息：
 
@@ -81,6 +87,8 @@ Build_All_HTML5_libs腳本位於 */Engine/Platforms/HTML5/Build/BatchFiles/*，�
 ``` BASH
 find [PATH/TO/YOUR/SEARCH/DIR] -name "*.sh" -exec chmod +x {} +
 ```
+
+---
 
 此外，其中build_html5_Ogg.sh除了權限問題，還會碰到下面問題，需要調整其腳本內容。
 
@@ -134,10 +142,10 @@ protected virtual string LibDirectory { get { return Path.Combine(Path.GetDirect
 > [/PATH/TO/YOUR/ENGINE]/Engine/Platforms/HTML5/Source/Developer/HTML5TargetPlatform/Private/HTML5TargetPlatformModule.cpp:10:9: error: 'LOCTEXT_NAMESPACE' macro redefined \
 > [-Werror,-Wmacro-redefined] \
 > #define LOCTEXT_NAMESPACE "FHTML5TargetPlatformModule" \
-> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ^ \
+> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ^ \
 > [/PATH/TO/YOUR/ENGINE]/Engine/Platforms/HTML5/Source/Developer/HTML5TargetPlatform/Private/HTML5TargetPlatform.h:21:9: note: previous definition is here \
 > #define LOCTEXT_NAMESPACE "FHTML5TargetPlatform" \
-> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ^ \
+> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ^ \
 > 1 error generated.
 
 解決方式：

@@ -13,6 +13,10 @@ enableRobotsTXT = true
 
 enableEmoji = true
 
+[caches]
+  [caches.images]
+    dir = ":cacheDir/images"
+
 [params]
   title = "給姆喇低賽"
   description = "記錄資訊或遊戲開發領域中的議題"

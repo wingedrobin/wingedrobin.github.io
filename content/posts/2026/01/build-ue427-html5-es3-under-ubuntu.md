@@ -4,12 +4,12 @@ date = '2026-01-14T16:32:52+08:00'
 draft = false
 +++
 
-> 系統版本： Ubuntu 24.04及Xubuntu 25.10 \
-> 測試專案： 2D Platform樣板專案
-
 由於在官方版本4.23後中止維護HTML5功能，因此如果需要4.24以後的功能或修正，只能想辦法自行實做或繞過。\
 經過考量之後，決定使用社群版引擎，以下紀錄在引擎編譯及專案打包過程中發生的問題與其解決方式。
 
+> 系統版本： Ubuntu 24.04及Xubuntu 25.10 \
+> 測試專案： 2D Platform樣板專案 \
+>
 > 注意： 以下內容僅能確保引擎建置及專案打包可以成功，不保證所有引擎功能皆正確無誤。
 
 # 下載引擎
@@ -144,7 +144,7 @@ protected virtual string LibDirectory { get { return Path.Combine(Path.GetDirect
 
 將`/Engine/Platforms/HTML5/Source/Developer/HTML5TargetPlatform/Private/HTML5TargetPlatformModule.cpp`的第10行給刪除(或註解掉)。
 
-此階段我只有碰到這個錯誤，解決之後應能順利將引擎編譯成功。
+此階段只有碰到這個錯誤，解決之後應能順利將引擎編譯成功。
 
 # 專案打包時期
 

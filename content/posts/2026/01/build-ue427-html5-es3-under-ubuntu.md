@@ -3,6 +3,7 @@ title = "社群版UE4.27-HTML5-ES3在Ubuntu上建置與打包的問題及處理"
 date = "2026-01-19T16:32:52+08:00"
 lastmod = "2026-01-21T14:07:58+08:00"
 draft = false
+tags = ["UE4", "HTML5", "Ubuntu"]
 +++
 
 由於在官方版本4.23後中止維護HTML5功能，因此如果需要4.24以後的功能或修正，只能想辦法自行實做或繞過。\
@@ -106,7 +107,7 @@ find [PATH/TO/YOUR/SEARCH/DIR] -name "*.sh" -exec chmod +x {} +
 
 解決方式：
 
-將39行開始修改為:
+將39行開始修改如下。
 
 ``` BASH
 if which emcc.py > /dev/null 2>&1; then

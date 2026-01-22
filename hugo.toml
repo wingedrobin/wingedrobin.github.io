@@ -17,6 +17,24 @@ enableEmoji = true
   [caches.images]
     dir = ":cacheDir/images"
 
+[menu]
+  [[menu.main]]
+    weight = 1
+    identifier = "about"
+    pre = ""
+    post = ""
+    name = "About"
+    url = "/about/"
+    title = ""
+  [[menu.main]]
+    weight = 2
+    identifier = "posts"
+    pre = ""
+    post = ""
+    name = "Posts"
+    url = "/posts/"
+    title = ""
+
 [params]
   title = "給姆喇低賽"
   description = "記錄資訊或遊戲開發領域中的議題"

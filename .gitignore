@@ -1,2 +1,5 @@
 *.code-workspace
 .hugo_build.lock
+
+public/
+resource/

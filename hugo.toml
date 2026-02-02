@@ -120,6 +120,8 @@ enableEmoji = true
       Telegram = false
 
     [params.page.comment]
+      enable = true
+
       [params.page.comment.giscus]
         enable = true
         repo = "wingedrobin/wingedrobin.github.io"

@@ -119,6 +119,22 @@ enableEmoji = true
       Mix = false
       Telegram = false
 
+    [params.page.comment]
+      [params.page.comment.giscus]
+        enable = true
+        repo = "wingedrobin/wingedrobin.github.io"
+        repoId = "MDEwOlJlcG9zaXRvcnk1MjQ5NjUzNg=="
+        category = "Announcements"
+        categoryId = "DIC_kwDOAyEImM4C1v1x"
+        lang = ""
+        mapping = "title"
+        reactionsEnabled = "1"
+        emitMetadata = "0"
+        inputPosition = "bottom"
+        lazyLoading = true
+        lightTheme = "light"
+        darkTheme = "dark"
+
 [markup]
   [markup.highlight]
     noClasses = false
@@ -126,4 +142,3 @@ enableEmoji = true
   [markup.tableOfContents]
     startLevel = 1
     endLevel = 6
-

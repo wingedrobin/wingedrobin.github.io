@@ -16,11 +16,11 @@ For more information about me, please check my [LinkedIn](https://linkedin.com/i
 
 # Solo Works
 
-* [Jewel Rotation](http://wingedrobin.github.io/JewelRotation/publish/html5)
-* [2048](http://wingedrobin.github.io/2048/publish/html5)
-* [Card Matching](http://wingedrobin.github.io/CardMatching/publish/html5)
+* [Jewel Rotation](http://wingedrobin.github.io/JewelRotation/publish/html5) — 2016
+* [2048](http://wingedrobin.github.io/2048/publish/html5) — 2016
+* [Card Matching](http://wingedrobin.github.io/CardMatching/publish/html5) — 2016
 
 # Education
 
-* Department of Computer Science & Information Engineering, National Central University. - 2015/01
-* Department of Computer Science, Tunghai University. - 2011/06
+* Department of Computer Science & Information Engineering, National Central University. — 2015/01
+* Department of Computer Science, Tunghai University. — 2011/06

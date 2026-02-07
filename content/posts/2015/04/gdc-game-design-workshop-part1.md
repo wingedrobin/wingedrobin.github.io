@@ -1,7 +1,7 @@
 +++
 title = "GDC遊戲設計工作坊系列 #1 － 認識遊戲目標如何營造戲劇張力"
 date = "2015-04-24T17:35:10+08:00"
-draft = true
+draft = false
 tags = []
 +++
 

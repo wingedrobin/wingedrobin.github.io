@@ -20,9 +20,9 @@ tags = ["UE4", "HTML5", "Ubuntu"]
 
 # 執行Setup.sh
 
-錯誤訊息：
-
-> Failed to download 'https://cdn.unrealengine.com/dependencies/UnrealEngine-43104418/010ea6faee2d21055f0ebd1d2ee7a201041d913c': Error: SecureChannelFailure (The authentication or decryption has failed.) (WebException)
+{{< admonition type=failure title="錯誤訊息" open=true >}}
+Failed to download `'https://cdn.unrealengine.com/dependencies/UnrealEngine-43104418/010ea6faee2d21055f0ebd1d2ee7a201041d913c'`: Error: SecureChannelFailure (The authentication or decryption has failed.) (WebException)
+{{< /admonition >}}
 
 解決方式：
 
@@ -34,9 +34,9 @@ tags = ["UE4", "HTML5", "Ubuntu"]
 
 [註] 此步驟與官方版不同，[**官方版建置流程**](https://dev.epicgames.com/documentation/en-us/unreal-engine/linux-quick-start?application_version=4.27#3-buildingue4onlinux)在執行Setup腳本後，應為執行GenerateProjectFiles腳本。
 
-錯誤訊息：
-
-> bash: ./HTML5Setup.sh: Permission denied
+{{< admonition type=failure title="錯誤訊息" open=true >}}
+bash: ./HTML5Setup.sh: Permission denied
+{{< /admonition >}}
 
 解決方式：
 
@@ -48,9 +48,9 @@ chmod +x HTML5Setup.sh
 
 ---
 
-錯誤訊息：
-
-> /HTML5Setup.sh: line 24: cmake: command not found
+{{< admonition type=failure title="錯誤訊息" open=true >}}
+/HTML5Setup.sh: line 24: cmake: command not found
+{{< /admonition >}}
 
 解決方式：
 
@@ -59,26 +59,26 @@ chmod +x HTML5Setup.sh
 
 ---
 
-錯誤訊息：
-
-> ./HTML5Setup.sh: line 33: python: command not found
+{{< admonition type=failure title="錯誤訊息" open=true >}}
+./HTML5Setup.sh: line 33: python: command not found
+{{< /admonition >}}
 
 由於Ubuntu已內建python3，所以安裝python-is-python3即可。
 
 ---
 
-錯誤訊息：
-
-> ./HTML5Setup.sh: line 388: ./Build_All_HTML5_libs.sh: Permission denied \
-> ./Build_All_HTML5_libs.sh: line 93: ./build_html5_zlib.sh: Permission denied \
-> ./Build_All_HTML5_libs.sh: line 94: ./build_html5_libPNG.sh: Permission denied \
-> ./Build_All_HTML5_libs.sh: line 96: ./build_html5_Ogg.sh: Permission denied \
-> ./Build_All_HTML5_libs.sh: line 97: ./build_html5_Vorbis.sh: Permission denied \
-> ./Build_All_HTML5_libs.sh: line 98: ./build_html5_libOpus.sh: Permission denied \
-> ./Build_All_HTML5_libs.sh: line 101: ./build_html5_ICU.sh: Permission denied \
-> ./Build_All_HTML5_libs.sh: line 103: ./build_html5_HarfBuzz.sh: Permission denied \
-> ./Build_All_HTML5_libs.sh: line 105: ./build_html5_FreeType2.sh: Permission denied \
-> ./Build_All_HTML5_libs.sh: line 112: ./build_html5_PhysX3.sh: Permission denied
+{{< admonition type=failure title="錯誤訊息" open=true >}}
+./HTML5Setup.sh: line 388: ./Build_All_HTML5_libs.sh: Permission denied \
+./Build_All_HTML5_libs.sh: line 93: ./build_html5_zlib.sh: Permission denied \
+./Build_All_HTML5_libs.sh: line 94: ./build_html5_libPNG.sh: Permission denied \
+./Build_All_HTML5_libs.sh: line 96: ./build_html5_Ogg.sh: Permission denied \
+./Build_All_HTML5_libs.sh: line 97: ./build_html5_Vorbis.sh: Permission denied \
+./Build_All_HTML5_libs.sh: line 98: ./build_html5_libOpus.sh: Permission denied \
+./Build_All_HTML5_libs.sh: line 101: ./build_html5_ICU.sh: Permission denied \
+./Build_All_HTML5_libs.sh: line 103: ./build_html5_HarfBuzz.sh: Permission denied \
+./Build_All_HTML5_libs.sh: line 105: ./build_html5_FreeType2.sh: Permission denied \
+./Build_All_HTML5_libs.sh: line 112: ./build_html5_PhysX3.sh: Permission denied
+{{< /admonition >}}
 
 Build_All_HTML5_libs腳本位於 */Engine/Platforms/HTML5/Build/BatchFiles/*，其餘腳本則位於下一層的 */ThirdParty/*。
 
@@ -96,12 +96,14 @@ find [PATH/TO/YOUR/SEARCH/DIR] -name "*.sh" -exec chmod +x {} +
 
 錯誤訊息：
 
-> \+ EMFLAGS=\
-> \+++ which emcc.py\
-> \++ dirname\
-> dirname: missing operand\
-> Try 'dirname --help' for more information.\
-> \+ EMPATH=
+{{< admonition type=failure title="錯誤訊息" open=true >}}
+\+ EMFLAGS=\
+\+++ which emcc.py\
+\++ dirname\
+dirname: missing operand\
+Try 'dirname --help' for more information.\
+\+ EMPATH=
+{{< /admonition >}}
 
 原因為透過which在環境變數$PATH的目錄中無法找到emcc.py，因此將腳本調整為if-else結構，處理搜尋結果為空的狀況。
 
@@ -122,9 +124,9 @@ export CFLAGS="-I\"$EMPATH/system/lib/libc\"" # 1.37.36 needs this...
 
 # 執行 GenerateProjectFiles.sh
 
-錯誤訊息：
-
-> WARNING: Library '[/PATH/TO/YOUR/ENGINE]/Engine/Plugins/Media/BinkMedia/Source/BinkMediaPlayerSDK/lib/BinkUnrealLinux.a' was not resolvable to a file when used in Module 'BinkMediaPlayerSDK', assuming it is a filename and will search library paths for it. This is slow and dependency checking will not work for it. Please update reference to be fully qualified alternatively use PublicSystemLibraryPaths if you do intended to use this slow path to suppress this warning.
+{{< admonition type=failure title="錯誤訊息" open=true >}}
+WARNING: Library '[/PATH/TO/YOUR/ENGINE]/Engine/Plugins/Media/BinkMedia/Source/BinkMediaPlayerSDK/lib/BinkUnrealLinux.a' was not resolvable to a file when used in Module 'BinkMediaPlayerSDK', assuming it is a filename and will search library paths for it. This is slow and dependency checking will not work for it. Please update reference to be fully qualified alternatively use PublicSystemLibraryPaths if you do intended to use this slow path to suppress this warning.
+{{< /admonition >}}
 
 (如果確定專案不會用到Bink，那麼忽略這個警告應該不會造成影響)
 
@@ -138,17 +140,17 @@ protected virtual string LibDirectory { get { return Path.Combine(Path.GetDirect
 
 # **make** (編譯引擎)
 
-錯誤訊息：
-
-> In file included from [/PATH/TO/YOUR/ENGINE]/Engine/Intermediate/Build/Linux/B4D820EA/UnrealFrontend/Development/HTML5/HTML5TargetPlatform/Module.HTML5TargetPlatform.cpp:4: \
-> [/PATH/TO/YOUR/ENGINE]/Engine/Platforms/HTML5/Source/Developer/HTML5TargetPlatform/Private/HTML5TargetPlatformModule.cpp:10:9: error: 'LOCTEXT_NAMESPACE' macro redefined \
-> [-Werror,-Wmacro-redefined] \
-> #define LOCTEXT_NAMESPACE "FHTML5TargetPlatformModule" \
-> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ^ \
-> [/PATH/TO/YOUR/ENGINE]/Engine/Platforms/HTML5/Source/Developer/HTML5TargetPlatform/Private/HTML5TargetPlatform.h:21:9: note: previous definition is here \
-> #define LOCTEXT_NAMESPACE "FHTML5TargetPlatform" \
-> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ^ \
-> 1 error generated.
+{{< admonition type=failure title="錯誤訊息" open=true >}}
+In file included from [/PATH/TO/YOUR/ENGINE]/Engine/Intermediate/Build/Linux/B4D820EA/UnrealFrontend/Development/HTML5/HTML5TargetPlatform/Module.HTML5TargetPlatform.cpp:4: \
+[/PATH/TO/YOUR/ENGINE]/Engine/Platforms/HTML5/Source/Developer/HTML5TargetPlatform/Private/HTML5TargetPlatformModule.cpp:10:9: error: 'LOCTEXT_NAMESPACE' macro redefined \
+[-Werror,-Wmacro-redefined] \
+#define LOCTEXT_NAMESPACE "FHTML5TargetPlatformModule" \
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ^ \
+[/PATH/TO/YOUR/ENGINE]/Engine/Platforms/HTML5/Source/Developer/HTML5TargetPlatform/Private/HTML5TargetPlatform.h:21:9: note: previous definition is here \
+#define LOCTEXT_NAMESPACE "FHTML5TargetPlatform" \
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ^ \
+1 error generated.
+{{< /admonition >}}
 
 解決方式：
 
@@ -158,9 +160,10 @@ protected virtual string LibDirectory { get { return Path.Combine(Path.GetDirect
 
 # 專案打包時期
 
-錯誤訊息：
 
-> UATHelper: Packaging (HTML5):   [/PATH/TO/YOUR/ENGINE]/Engine/Binaries/ThirdParty/Python/Linux/bin/python2.7: error while loading shared libraries: libpython2.7.so.1.0: cannot open shared object file: No such file or directory
+{{< admonition type=failure title="錯誤訊息" open=true >}}
+UATHelper: Packaging (HTML5):   [/PATH/TO/YOUR/ENGINE]/Engine/Binaries/ThirdParty/Python/Linux/bin/python2.7: error while loading shared libraries: libpython2.7.so.1.0: cannot open shared object file: No such file or directory
+{{< /admonition >}}
 
 因為後續打包流程會使用到emsdk-4.0.22，而emsdk-4.0.22會用到python3.10以上版本的功能，即便把找不到shared libraries libpython2.7.so.1.0的問題給解決掉，也沒有辦法正常完成打包流程，所以直接修改為使用python3。
 

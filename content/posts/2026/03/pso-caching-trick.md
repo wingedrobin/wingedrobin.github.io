@@ -5,13 +5,37 @@ draft = true
 tags = ["UE4", "UE5"]
 +++
 
-在咒的Demo上架後碰到玩家lag的狀況才開始
+# 緣由
+
+24年的10月，我們在新品節期間發布了[咒](https://store.steampowered.com/app/2328540/)的Demo版，發現即便玩家有高於建議配備的硬體，仍然會出現lag的狀況，才開始認識到PSO這個東西。 \
+至於這篇文章並不是在講述UE跟PSO的細節，而是分享我在實務中如何簡化團隊內部測試時收集PSO的手法。
 
 後續用在咒跟狂熱兩個案子上
+
+# PSO流程
+
+{{< admonition type=info title="Config/DefaultEngine.ini" open=true >}}
+[ConsoleVariables]
+r.ShaderPipelineCache.Enabled=1
+r.ShaderPipelineCache.LogPSO=1
+r.ShaderPipelineCache.SaveBoundPSOLog=1
+{{< /admonition >}}
+或是在啟動遊戲時，帶入-logpso參數
+
+因為我希望之後打包的Shipping版可以同時用在內部測試及推上Steam，不需要修改ini後重新打包一個版本，所以選擇使用啟動遊戲時帶入參數的方式。
+
+遊戲測試結束後.upipelinecache檔會寫入到(shipping版在`C:\Users\{user_name}\AppData\Local\{PROJECT_NAME}\Saved\CollectedPSOs`，而Development版在`{PROJECT_NAME}\Saved\CollectedPSOs`)
+需要把每個人測試產生的upipelinecache檔收集起來，重新打包進新的版本，才會有最新的PSO的效果。
+
+# 會碰到的問題
 
 讓團隊的每個成員每次測試打包版都用console開啟遊戲並帶入參數，或是建立捷徑後在屬性加入參數，這兩種方式都不可行；測試結束後再自行把pipeline cache檔上傳到NAS，這個也不可行，因為與原本習慣的測試流程不同，需要事先教育、提醒，但一定會有人忘記，所以不可行，需要找其他方式進行。
 
 輸入指令、建立捷徑
+
+# 簡化手法
+
+由一隻獨立的程式啟動遊戲、代入-logpso參數，並在遊戲結束後把pso檔案上傳到NAS
 
 前置常數設定
 1. 專案名稱
@@ -32,9 +56,9 @@ tags = ["UE4", "UE5"]
 10. 刪除本地pipeline cache，避免之後重複上傳相同檔案
 11. 結束python程式
 
-使用PyInstaller將此python程式打包成.exe檔，同時換上與遊戲相同的執行檔圖示(.ico)
+使用PyInstaller將此python程式打包成.exe檔，同時換上與遊戲相同的執行檔圖示(.ico)，偽裝成原本遊戲的啟動exe
 
-之後只要將此.exe檔替換掉原本專案打包出來的.exe
+之後每次打包只要將此.exe檔替換掉原本專案打包出來的.exe
 再放到NAS上，給其他人下載、測試
 就不需要讓其他人下-logpso的指令、也不需要在測試結束後，手動把pipeline cache複製到NAS上了
 

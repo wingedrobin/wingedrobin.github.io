@@ -1,7 +1,7 @@
 +++
 title = "不著痕跡收集UE專案的PSO快取"
 date = "2026-03-13T17:49:43+08:00"
-lastmod = "2026-03-16T17:38:39+08:00"
+lastmod = "2026-03-16T20:49:27+08:00"
 draft = false
 tags = ["UE4", "UE5"]
 +++
@@ -12,8 +12,8 @@ tags = ["UE4", "UE5"]
 
 至於這篇文章並不是在講述UE跟PSO的內容，而是分享我在實務中如何簡化團隊內部測試時收集PSO cache的手法，後續也繼續沿用在[伊藤潤二狂熱:無盡的囹圄](https://store.steampowered.com/app/3633250/)專案上。
 
-[註1] 咒在製作的時候是使用UE4.27，當時引擎尚未提供[PSO Precaching](https://dev.epicgames.com/documentation/en-us/unreal-engine/pso-precaching-for-unreal-engine)機制；而伊藤案則是使用UE5.3，但由於當時專案時程緊迫，並無多餘時間研究該功能，或許這個新機制能夠更好的解決PSO在收集上的一些問題。不過至少在UE5.3(含)以前，引擎原本提供的PSO收集方式與這篇文章提出的手法都還適用。 \
-[註2] 本篇文章內容以Windows環境為主。
+[註1] 本篇文章內容以Windows環境為主。 \
+[註2] 在製作咒的時候是使用UE4.27，當時引擎尚未提供[PSO Precaching](https://dev.epicgames.com/documentation/en-us/unreal-engine/pso-precaching-for-unreal-engine)機制；而伊藤案則是使用UE5.3，但由於當時專案時程緊迫，並無多餘時間研究該功能，或許這個新機制能夠更好的解決PSO在收集上的一些問題。不過至少在UE5.3(含)以前，引擎原本提供的PSO收集方式與這篇文章提出的手法都還適用。
 
 # 詞彙說明
 
@@ -75,7 +75,7 @@ flowchart LR
 演算法大致如下：
 
 1. 找出*PROJECT_NAME\Binaries\Win64*路徑下的main game executable
-2. 檢查main game executable的路徑中是否帶有`Shipping`字串，如果有，則為Shipping版，以一個布林值做紀錄。
+2. 檢查main game executable的路徑中是否帶有**Shipping**字串，如果有，則為Shipping版，以一個布林值做紀錄。
 3. 用os.system加上main game executable的路徑以執行遊戲，同時帶入`-logpso`參數(如果需要指定產出的Shader Model版本，可以再加上`-sm5`或`-sm6`參數)
 4. 遊戲結束後腳本繼續往下執行
 5. 檢查NAS能否連接，如果不能，則結束腳本
@@ -85,6 +85,20 @@ flowchart LR
 9. 刪除本地PSO cache，避免之後測試相同版本後會再次上傳相同檔案
 10. 結束python程式
 
+{{< mermaid >}}
+flowchart TD
+    begin --> A[找到main game executable]
+    A --> B[判斷是否為Shipping版]
+    B --> C[執行遊戲並帶入參數]
+    C --> |遊戲結束後| D[檢查NAS能否連線]
+    D --> |Valid| E[檢查是否產生PSO cache]
+    D --> |Invalid| stop
+    E --> |Yes| F[上傳PSO cache到NAS]
+    E --> |No| stop
+    F --> G[刪除本地PSO cache]
+    G --> stop
+{{< /mermaid >}}
+
 ## 腳本用法
 
 使用PyInstaller將腳本打包成exe檔，並換上與遊戲相同的執行檔圖示(.ico)，偽裝成原本遊戲的bootstrap executable。
@@ -93,11 +107,19 @@ flowchart LR
 
 而把PSO cache統一放在NAS上，也便於打包流程一併將所有的PSO cache包進最新的版本內。
 
+## 簡化效果比較
+
+| | 原始測試流程 | PSO cache收集 + 未簡化 | PSO cache收集 + 簡化後 |
+| :---: | :---: | :---: | :---: |
+| 啟動遊戲 | 執行bootstrap executable | 需透過terminal或建立捷徑手動輸入參數 | 執行偽裝的bootstrap executable |
+| PSO cache收集 | - | 測試後，需手動找到檔案並上傳至NAS | 遊戲關閉後自動上傳NAS |
+| 風險 | - | 高(容易發生忘記加參數或忘記上傳) | 零 |
+
 # 後記
 
 這篇的內容不是什麼很正規的方法，畢竟原本的bootstrap executable有其作用(可參考reference)，不過當時在公司內部並沒有出現什麼狀況，也能解決PSO收集上的痛點，所以就連續用在兩個專案上了，如果讀者有什麼更適合的方案也歡迎留言討論。
 
-[註] 我自己把這個手法稱作『**輕薄的假象**』，雖然其實一點也不輕薄(原本的Bootstrap executable大約是2xx~3xxKB左右，而python腳本包裝成的exe大約是6MB左右)。經過兩個專案的試驗，沒有任何團隊同仁主動向我回報發現執行檔大小有異狀，應該可以算是偷渡成功了吧？
+我自己把這個手法稱作『**輕薄的假象**』，雖然其實一點也不輕薄(原本的Bootstrap executable大約是2xx~3xxKB左右，而python腳本包裝成的exe大約是6MB左右)。經過兩個專案的試驗，沒有任何團隊同仁主動向我回報發現執行檔大小有異狀，應該可以算是偷渡成功了吧？
 
 # Reference
 
@@ -108,5 +130,4 @@ flowchart LR
 * [Unreal – BootstrapPackagedGame has dual EXEs after packaging](https://www.myredstone.top/en/archives/2761)
 
 [^1]: 需要把每個人測試產生的upipelinecache檔收集起來，重新打包進新的版本，才會有最新的PSO的效果。
-
 [^2]: 該資料夾會在有啟用PSO caching的遊戲被測試後才建立，並將.upipelinecache檔置於此處。Shipping版路徑為 *C:\Users\USER_NAME\AppData\Local\PROJECT_NAME\Saved\CollectedPSOs*，而Development版則是 *PROJECT_NAME\Saved\CollectedPSOs*
